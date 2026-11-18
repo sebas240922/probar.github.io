@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Un jardín de lirios para ti 🌸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #fff0f5, #fbd5e5, #fff7fa);
+    color: #854b65;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* FONDO */
+
+.background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: #ffc1d9;
+    filter: blur(100px);
+    opacity: .5;
+    border-radius: 50%;
+}
+
+.glow.one {
+    top: 10%;
+    left: -100px;
+}
+
+.glow.two {
+    bottom: 5%;
+    right: -100px;
+}
+
+/* PÉTALOS */
+
+.petal {
+    position: fixed;
+    top: -40px;
+    z-index: 5;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* CONTENIDO PRINCIPAL */
+
+main {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.subtitle {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #b77b96;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(50px, 8vw, 95px);
+    font-weight: normal;
+    color: #c45d88;
+    text-shadow: 2px 3px 15px #f4b9d0;
+    animation: appear 2s ease;
+}
+
+.description {
+    max-width: 580px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 2;
+    margin: 20px auto 30px;
+    color: #86566c;
+}
+
+.line {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        #c99a65,
+        transparent
+    );
+    margin: 15px auto;
+}
+
+/* FLORES */
+
+.flower-frame {
+    width: min(340px, 85vw);
+    height: 260px;
+    margin: 10px auto 30px;
+    border: 5px solid white;
+    border-radius: 150px 150px 30px 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px #d88ba94d;
+    animation: float 5s ease-in-out infinite;
+}
+
+.flower-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s;
+}
+
+.flower-frame:hover img {
+    transform: scale(1.1);
+}
+
+/* BOTÓN */
+
+button {
+    border: 1px solid #d89ab4;
+    background: linear-gradient(135deg, #d981a5, #bb5e87);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px #d981a566;
+    transition: .4s;
+}
+
+button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px #c45d8877;
+}
+
+/* MENSAJE */
+
+#message {
+    display: none;
+    max-width: 550px;
+    margin-top: 35px;
+    padding: 25px;
+    background: #ffffffc9;
+    border: 1px solid #eac1d3;
+    border-radius: 20px;
+    animation: appear 1s ease;
+}
+
+#message h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    font-weight: normal;
+    color: #c45d88;
+    margin-bottom: 10px;
+}
+
+#message p {
+    font-size: 14px;
+    line-height: 2;
+}
+
+/* FRASES */
+
+.quotes {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 65px;
+}
+
+.quotes h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 45px;
+    font-weight: normal;
+    color: #c45d88;
+    margin-bottom: 25px;
+}
+
+.quote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.quote {
+    background: #ffffff80;
+    border: 1px solid white;
+    border-radius: 18px;
+    padding: 25px 15px;
+    font-size: 13px;
+    line-height: 1.9;
+    transition: .4s;
+}
+
+.quote:hover {
+    transform: translateY(-8px);
+    background: white;
+}
+
+.quote span {
+    display: block;
+    color: #c18b54;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* DECORACIÓN */
+
+.corner {
+    position: fixed;
+    z-index: 1;
+    font-size: 65px;
+    opacity: .8;
+    animation: float 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.top-left {
+    top: 15px;
+    left: 15px;
+}
+
+.top-right {
+    top: 15px;
+    right: 15px;
+}
+
+.bottom-left {
+    bottom: 10px;
+    left: 15px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 15px;
+}
+
+/* BOTÓN DE MÚSICA */
+
+.music-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 20;
+    text-align: center;
+}
+
+.music-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border: 1px solid #e7a9c2;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #f8c4d9, #d981a5);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px #d981a566;
+    transition: .4s;
+}
+
+.music-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #d981a588;
+}
+
+.music-button span:first-child {
+    font-size: 22px;
+}
+
+/* REPRODUCTOR OCULTO */
+
+.music-player {
+    display: none;
+    width: 240px;
+    margin-top: 12px;
+    padding: 12px;
+    background: #fff7fa;
+    border: 1px solid #e8b7cc;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px #d88ba955;
+    animation: appear .4s ease;
+}
+
+.music-player p {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #a64e77;
+}
+
+.music-player audio {
+    width: 100%;
+    height: 40px;
+}
+
+.music-footer {
+    text-align: center;
+    font-size: 10px;
+    color: #b77b96;
+    margin-top: 7px;
+}
+
+/* ANIMACIONES */
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CELULARES */
+
+@media(max-width: 650px) {
+
+    .quote-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .corner {
+        font-size: 38px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .flower-frame {
+        height: 230px;
+    }
+
+    main {
+        padding-top: 80px;
+        padding-bottom: 200px;
+    }
+
+    .music-container {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .music-player {
+        width: 210px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FONDO -->
+
+<div class="background">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<!-- FLORES DECORATIVAS -->
+
+<div class="corner top-left">🌸</div>
+<div class="corner top-right">🌷</div>
+<div class="corner bottom-left">🌷</div>
+<div class="corner bottom-right">🌸</div>
+
+<!-- CONTENIDO -->
+
+<main>
+
+    <p class="subtitle">
+        Un pequeño rincón lleno de belleza
+    </p>
+
+    <h1>
+        lirios para mi delerio
+    </h1>
+
+    <div class="line"></div>
+
+    <p class="description">
+        Lirios para la mujer mas bella,
+        la que se merece el mundo entero.
+    </p>
+
+    <!-- IMAGEN PRINCIPAL -->
+
+    <div class="flower-frame">
+        <img
+        src="img/WhatsApp Image 2026-11-16 at 8.19.09 PM.jpeg"
+        alt="Arreglo de flores rosadas">
+    </div>
+
+    <!-- BOTÓN PRINCIPAL -->
+
+    <button onclick="showMagic()">
+        For you mai lof
+    </button>
+
+    <!-- MENSAJE ESPECIAL -->
+
+    <div id="message">
+
+        <h2>
+            Esta cartita leela con la cancion sparks 
+        </h2>
+
+        <p>
+            MMi amor, quiero que sepas que te amo demasiado, muchísimo más de lo que a veces puedo expresar con palabras no sabes lo feliz que me hace tenerte en mi vida y poder llamarte mi enamorada desde que llegaste  te has convertido en alguien demasiado especial para mí, alguien en quien pienso durante el día y a quien siempre quiero hacer sonreír quiero que tengas siempre en cuenta que nunca estarás sola quiero estar contigo en tus días bonitos, pero también en esos días en los que las cosas no salgan como esperabas quiero escucharte cuando tengas algo que contarme, apoyarte cuando sientas que las cosas se complican y recordarte lo maravillosa que eres cuando tú misma llegues a olvidarlo estoy demasiado enamorado de ti me encanta todo de ti, desde tu forma de ser hasta esos pequeños detalles que quizás ni siquiera notas me encanta hablar contigo, saber cómo estuvo tu día, compartir momentos contigo y hasta extrañarte cuando no estamos juntos no necesito que hagas algo extraordinario para hacerme feliz, porque muchas veces basta con recibir un mensajito tuyo para alegrarme el día quiero seguir conociéndote, seguir creando recuerdos contigo, acompañarte en tus sueños y celebrar cada uno de tus logros no sé qué nos tenga preparado el futuro, pero sí sé que hoy quiero seguir eligiéndote, cuidando lo nuestro y demostrando con hechos todo el amor que siento por ti eres una persona increíble y me siento muy afortunado de tenerte. Si pudiera pedir algo, sería que nunca te falten motivos para sonreír y que siempre tengas presente lo amada que eres te amo demasiado amor mio y quiero que sepas que te amo con cada detalle y cada momenot que compartamos ❤️
+        </p>
+
+        <div class="line"></div>
+
+        <span>♡ Te lobo ♡</span>
+
+    </div>
+
+    <!-- FRASES -->
+
+    <section class="quotes">
+
+        <h2>
+            Pequeños recordatorios que no están de más
+        </h2>
+
+        <div class="quote-grid">
+
+            <div class="quote">
+                <span>🌷</span>
+                Recuerda que la única competencia eres tú misma, no te compares con los demás ni te apresures por llegar a donde otros están cada pequeño paso que das, cada obstáculo que superas y cada vez que decides no rendirte te acerca a la persona que sueñas ser solo confía en tu proceso, reconoce lo mucho que has avanzado y nunca olvides que eres capaz de lograr cosas maravillosas.
+            </div>
+
+            <div class="quote">
+                <span>🌸</span>
+                Que no te afecten los comentarios de otras personas, porque solo tú sabes cuánto esfuerzo, dedicación y sacrificio hay detrás de cada paso que das para llegar hasta donde estás no permitas que opiniones ajenas te hagan dudar de ti ni de tus capacidades lo que importante es que tú conozcas tu valor, te sientas orgullosa de tu camino y nunca dejes de creer en ti.
+            </div>
+
+            <div class="quote">
+                <span>💗</span>
+                Recordarte también que nunca permitas que las actitudes de otras personas que te hagan sentir mal o que no eres suficiente o que simplemente no perteneces a algún lugar, aveces las personas juzgan sin conocer realmente las cosas y te pueden llegarte hacer sentir  mal , pero no dejes que cambien tu forma tan bonita que tienes, recuerda que vales mucho y siempre ponerte a ti por delante nunca dudes de ti.
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- BOTÓN DE MÚSICA -->
+
+<div class="music-container">
+
+    <button class="music-button" onclick="togglePlayer()">
+        <span id="musicIcon">♫</span>
+        <span id="musicText">Escuchar música</span>
+    </button>
+
+    <!-- REPRODUCTOR MP3 -->
+
+    <div class="music-player" id="musicPlayer">
+
+        <p>te amo y mas 💜</p>
+
+        <audio controls>
+            <source src="musica/Libro de La Vida - Te Amo y mas (Letra) - Lawan Wang.mp3"
+            Tu navegador no puede reproducir este audio.
+        </audio>
+
+        <div class="music-footer">
+            cada que escucho esta cancion me recuerda a lo hermoso que es estar contigo
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// CREAR PÉTALOS
+
+function createPetal() {
+
+    const petal = document.createElement("div");
+
+    const flowers = ["🌸", "🌷", "✿", "❀"];
+
+    petal.className = "petal";
+
+    petal.textContent =
+        flowers[Math.floor(Math.random() * flowers.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+
+    petal.style.fontSize =
+        (12 + Math.random() * 18) + "px";
+
+    petal.style.animationDuration =
+        (6 + Math.random() * 7) + "s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 14000);
+
+}
+
+// LLUVIA CONSTANTE DE PÉTALOS
+
+setInterval(createPetal, 450);
+
+
+// MENSAJE ESPECIAL
+
+function showMagic() {
+
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    message.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    // LLUVIA DE FLORES
+
+    for (let i = 0; i < 30; i++) {
+
+        setTimeout(createPetal, i * 100);
+
+    }
+
+}
+
+
+// BOTÓN PARA MOSTRAR Y OCULTAR LA MÚSICA
+
+function togglePlayer() {
+
+    const player = document.getElementById("musicPlayer");
+
+    const icon = document.getElementById("musicIcon");
+
+    const text = document.getElementById("musicText");
+
+    const audio = player.querySelector("audio");
+
+    if (player.style.display === "block") {
+
+        player.style.display = "none";
+
+        audio.pause();
+
+        icon.textContent = "♫";
+
+        text.textContent = "Escuchar música";
+
+    } else {
+
+        player.style.display = "block";
+
+        icon.textContent = "♪";
+
+        text.textContent = "Cerrar música";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
